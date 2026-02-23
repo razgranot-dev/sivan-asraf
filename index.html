@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>סיון אסרף | פסיכותרפיסטית CBT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #e8f5f3;
+      --primary: #2d6e68;
+      --primary-light: #4a9e96;
+      --white: #ffffff;
+      --text-dark: #2d6e68;
+      --text-muted: #5a8f8a;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 16px rgba(45, 110, 104, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Rubik', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-dark);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    /* ===== Utility ===== */
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 64px 0;
+    }
+
+    h2.section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* ===== Responsive grid ===== */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      h2.section-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* ===== Navbar ===== */
+    nav {
+      background-color: var(--primary);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      color: var(--white);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    @media (max-width: 580px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* ===== Hero Animations ===== */
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.6), 0 4px 16px rgba(0,0,0,0.15); }
+      50%       { box-shadow: 0 0 0 14px rgba(255,255,255,0), 0 4px 16px rgba(0,0,0,0.15); }
+    }
+
+    /* ===== Hero Section ===== */
+    #hero {
+      background: linear-gradient(135deg, #1a5a54 0%, var(--primary) 35%, var(--primary-light) 65%, #3a9e96 100%);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
+      color: var(--white);
+      padding: 96px 0 80px;
+      text-align: center;
+    }
+
+    .logo-wrapper {
+      background: white;
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 4px 20px rgba(45, 110, 104, 0.15);
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .logo-wrapper img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+    #hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      animation: fadeInDown 0.8s ease both;
+    }
+
+    #hero .subtitle {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 1s both;
+    }
+
+    #hero .tagline {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 36px;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, #ffffff 0%, #d4f0ec 100%);
+      color: var(--primary);
+      font-family: 'Rubik', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 14px 36px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      animation-play-state: paused;
+    }
+
+    /* ===== Treatment Areas ===== */
+    #treatments {
+      background-color: var(--bg);
+    }
+
+    .treatment-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .treatment-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(45, 110, 104, 0.25);
+    }
+
+    .treatment-card .icon {
+      font-size: 2rem;
+      color: #2d6e68;
+      margin-bottom: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .treatment-card:hover .icon {
+      transform: scale(1.2);
+    }
+
+    .treatment-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .treatment-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== Testimonials ===== */
+    #testimonials {
+      background: linear-gradient(135deg, #b8deda 0%, #c8ece8 50%, #d4ede9 100%);
+    }
+
+    .testimonial-card {
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid #2d6e68;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #testimonials .testimonial-card:nth-child(1) { background: #ffffff; }
+    #testimonials .testimonial-card:nth-child(2) { background: #f0faf8; }
+    #testimonials .testimonial-card:nth-child(3) { background: #e0f2ef; }
+
+    #testimonials .testimonial-card:hover {
+      background: #f8fffe;
+      box-shadow: 0 8px 24px rgba(45, 110, 104, 0.2);
+    }
+
+    .testimonial-card .quote {
+      font-size: 1rem;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    .testimonial-card .quote::before {
+      content: '\201C';
+      display: block;
+      font-size: 3.5rem;
+      color: var(--primary);
+      font-weight: 700;
+      font-style: normal;
+      line-height: 1;
+      margin-bottom: -4px;
+    }
+
+    .testimonial-card .author {
+      font-weight: 700;
+      color: var(--primary-light);
+      font-size: 0.95rem;
+    }
+
+    /* ===== Contact Section ===== */
+    #contact {
+      background-color: var(--bg);
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    @media (max-width: 720px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-info h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .contact-info p {
+      margin-bottom: 10px;
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .contact-info strong {
+      color: var(--text-dark);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    form label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    form input,
+    form select,
+    form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #b2d8d4;
+      border-radius: 10px;
+      font-family: 'Rubik', sans-serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: var(--white);
+      direction: rtl;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    form input:focus,
+    form select:focus,
+    form textarea:focus {
+      border-color: var(--primary);
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #2d6e68 0%, #4a9e96 100%);
+      color: var(--white);
+      font-family: 'Rubik', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 14px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #4a9e96 0%, #2d6e68 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(45, 110, 104, 0.3);
+    }
+
+    #success-msg {
+      display: none;
+      background: #c8ece8;
+      color: var(--primary);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    /* ===== Wave Divider ===== */
+    .wave-divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--primary-light) 20%, var(--primary) 50%, var(--primary-light) 80%, transparent 100%);
+      margin: 0 10%;
+    }
+
+    /* ===== Scroll Reveal ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+    }
+
+    .scroll-reveal.visible {
+      animation: fadeIn 0.6s ease both;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background-color: var(--primary);
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      padding: 24px 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="container">
+      <span class="nav-brand">סיון אסרף | CBT</span>
+      <ul class="nav-links">
+        <li><a href="#treatments">תחומי טיפול</a></li>
+        <li><a href="#testimonials">המלצות</a></li>
+        <li><a href="#contact">צרו קשר</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="container">
+      <div class="logo-wrapper">
+        <img src="logo.png" alt="לוגו סיון אסרף" class="hero-logo">
+      </div>
+      <h1>סיון אסרף</h1>
+      <p class="subtitle">פסיכותרפיסטית קוגניטיבית-התנהגותית (CBT)</p>
+      <p class="tagline">מטפלת בילדים, בני נוער ומבוגרים</p>
+      <a href="#contact" class="btn-cta">השאירו פרטים ואחזור אליכם</a>
+    </div>
+  </section>
+
+  <!-- Treatment Areas -->
+  <section id="treatments">
+    <div class="container">
+      <h2 class="section-title">תחומי טיפול</h2>
+      <div class="grid-3">
+        <div class="treatment-card">
+          <i class="fa-solid fa-heart-pulse icon"></i>
+          <h3>חרדות</h3>
+          <p>טיפול בחרדה כללית, חרדה חברתית, פוביות וחרדת ביצוע באמצעות כלי CBT מוכחים.</p>
+        </div>
+        <div class="treatment-card">
+          <i class="fa-solid fa-person-rays icon"></i>
+          <h3>ערך עצמי נמוך</h3>
+          <p>חיזוק הדימוי העצמי ופיתוח חמלה עצמית לחיים מאוזנים ומספקים יותר.</p>
+        </div>
+        <div class="treatment-card">
+          <i class="fa-solid fa-brain icon"></i>
+          <h3>ויסות רגשי</h3>
+          <p>לימוד כלים מעשיים לזיהוי, הבנה וניהול רגשות בצורה בריאה ואדפטיבית.</p>
+        </div>
+        <div class="treatment-card">
+          <i class="fa-solid fa-face-smile icon"></i>
+          <h3>ניהול כעסים</h3>
+          <p>פיתוח מיומנויות להתמודדות עם כעס, תסכול ורגשות עזים בסביבה בטוחה.</p>
+        </div>
+        <div class="treatment-card">
+          <i class="fa-solid fa-star icon"></i>
+          <h3>קשיי ילדים ובני נוער</h3>
+          <p>ליווי מקצועי לילדים ובני נוער המתמודדים עם קשיים רגשיים, חברתיים ולימודיים.</p>
+        </div>
+        <div class="treatment-card">
+          <i class="fa-solid fa-moon icon"></i>
+          <h3>שינה ועייפות</h3>
+          <p>טיפול בהפרעות שינה, מתח כרוני ותשישות נפשית בגישה קוגניטיבית-התנהגותית.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" aria-hidden="true"></div>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <h2 class="section-title">מה אומרים המטופלים</h2>
+      <div class="grid-3">
+        <div class="testimonial-card">
+          <p class="quote">"סיון עזרה לי להבין את עצמי מחדש. אחרי חודשים של טיפול הרגשתי שינוי אמיתי ביחס שלי לעצמי ולסביבה שלי. ממליצה בחום!"</p>
+          <span class="author">— מיכל ר., 34</span>
+        </div>
+        <div class="testimonial-card">
+          <p class="quote">"הבן שלי פחד ללכת לבית הספר כל בוקר. אחרי שלושה חודשים אצל סיון, הוא הולך בשמחה. לא האמנתי שזה אפשרי כל כך מהר."</p>
+          <span class="author">— אורית כ., אמא של דניאל (9)</span>
+        </div>
+        <div class="testimonial-card">
+          <p class="quote">"הגעתי עם חרדה חברתית חמורה. סיון נתנה לי כלים פרקטיים שאני משתמש בהם כל יום. היא מקצועית, אמפתית וממש מבינה."</p>
+          <span class="author">— יואב ל., 28</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" aria-hidden="true"></div>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">צרו קשר</h2>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3>נשמח לשמוע ממכם</h3>
+          <p>📞 <strong>058-561-7948</strong></p>
+          <p>📍 <strong>קליניקה בתל מונד</strong></p>
+          <p>השאירו פרטים ואחזור אליכם בהקדם האפשרי לתיאום שיחת היכרות ראשונה ללא התחייבות.</p>
+        </div>
+        <div>
+          <form id="contact-form">
+            <div>
+              <label for="name">שם מלא *</label>
+              <input type="text" id="name" name="name" placeholder="שם מלא" required />
+            </div>
+            <div>
+              <label for="phone">טלפון *</label>
+              <input type="tel" id="phone" name="phone" placeholder="05X-XXX-XXXX" required />
+            </div>
+            <div>
+              <label for="reason">סיבת פנייה</label>
+              <select id="reason" name="reason">
+                <option value="">בחרו נושא...</option>
+                <option value="anxiety">חרדות</option>
+                <option value="self-esteem">ערך עצמי נמוך</option>
+                <option value="emotion">ויסות רגשי</option>
+                <option value="anger">ניהול כעסים</option>
+                <option value="child">קשיי ילדים / בני נוער</option>
+                <option value="sleep">שינה ועייפות</option>
+                <option value="other">אחר</option>
+              </select>
+            </div>
+            <div>
+              <label for="message">הודעה</label>
+              <textarea id="message" name="message" placeholder="ספרו לנו קצת על מה שמביא אתכם..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">שלחו פרטים</button>
+          </form>
+          <div id="success-msg">
+            תודה רבה! קיבלנו את פרטיכם ונחזור אליכם בהקדם 💚
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 סיון אסרף | פסיכותרפיסטית קוגניטיבית-התנהגותית | כל הזכויות שמורות</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    });
+
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.treatment-card, .testimonial-card, h2.section-title').forEach(function(el) {
+      el.classList.add('scroll-reveal');
+      revealObserver.observe(el);
+    });
+  </script>
+
+</body>
+</html>
