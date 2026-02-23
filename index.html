@@ -530,7 +530,7 @@
           <p>השאירו פרטים ואחזור אליכם בהקדם האפשרי.</p>
         </div>
         <div>
-          <form id="contact-form">
+          <form id="contact-form" action="https://formspree.io/f/xojnpnvo" method="POST">
             <div>
               <label for="name">שם מלא *</label>
               <input type="text" id="name" name="name" placeholder="שם מלא" required />
@@ -574,10 +574,8 @@
   </footer>
 
   <script>
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      this.style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
+    document.getElementById('contact-form').addEventListener('submit', function() {
+      // Formspree handles submission and redirect
     });
 
     var revealObserver = new IntersectionObserver(function(entries) {
